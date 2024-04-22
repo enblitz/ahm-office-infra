@@ -14,3 +14,4 @@ for file in "${compose_files[@]}"; do
     docker-compose -f "$file" up 
 done
 
+
