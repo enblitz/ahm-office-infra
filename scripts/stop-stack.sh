@@ -12,6 +12,6 @@ compose_files=(
 
 # Start each Docker Compose file in the background
 for file in "${compose_files[@]}"; do
-    docker-compose -f "$file" down
+    docker-compose -f "$file" stop
 done
 
