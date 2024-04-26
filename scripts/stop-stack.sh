@@ -4,6 +4,8 @@
 compose_files=(
     "docker-compose-website.yml"
     "docker-compose-jenkins.yml"
+    "docker-compose-prometheus.yml"
+    "docker-compose-grafana.yml"
     # "/docker-compose-files/docker-compose-next-home-finder.yml"
     # "/docker-compose-files/docker-compose-website.yml"
     # "/docker-compose-files/pro-gra//docker-compose.yml"
@@ -14,4 +16,3 @@ compose_files=(
 for file in "${compose_files[@]}"; do
     docker-compose -f "$file" stop
 done
-
