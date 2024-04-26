@@ -26,6 +26,11 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 # Access Application
 - 1) [Website](http://devops.enblitz.com:3000) : http://devops.enblitz.com:3000
 - 2) [Jenkins](http://devops.enblitz.com:8081) : http://devops.enblitz.com:8081
+- 1) [prometheus](http://devops.enblitz.com:9090) : http://devops.enblitz.com:9090
+- 2) [grafana](http://devops.enblitz.com:3030) : http://devops.enblitz.com:3030
+
+
+
 
 ### Issue 1: web Error 9.0s
 Error response from daemon: pull access denied for enblitztechnologies/website, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
