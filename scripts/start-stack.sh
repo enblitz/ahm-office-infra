@@ -13,5 +13,5 @@ compose_files=(
 
 # Start each Docker Compose file in the background
 for file in "${compose_files[@]}"; do
-    docker-compose -f "$file" up -d
+    docker compose -f "$file" up -d
 done
