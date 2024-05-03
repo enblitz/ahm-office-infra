@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  lsses:
+    image: jainam05/lsses:latest
+    ports:
+      - "1234:8000"
+    environment:
+      - EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+      - EMAIL_HOST_USER='shahjainam6411@gmail.com'
+      - EMAIL_HOST='smtp.gmail.com'
+      - EMAIL_PORT='587'
+      - EMAIL_HOST_PASSWORD='arqulqpojmtzjxit'
+      - EMAIL_USE_TLS='true'
+      - RAZORPAY_API_KEY='rzp_test_I9DANSLk2wH5Ib'
+      - RAZORPAY_API_SECRET_KEY='F60ZYATM2RmiaMU4ptOOIpGx'

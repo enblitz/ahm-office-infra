@@ -3,10 +3,10 @@ version: '3'
 services:
   jenkins:
     image: jenkins/jenkins:lts
-    container_name: jenkins
+    container_name: jenkins-1
     ports:
-      - "8081:8080"
-      - "50001:50000"
+      - "1002:8080"
+      - "1001:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
     restart: always

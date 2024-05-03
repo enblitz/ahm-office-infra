@@ -4,9 +4,9 @@
 compose_files=(
     "docker-compose-website.yml"
     "docker-compose-jenkins.yml"
-    # "/docker-compose-files/docker-compose-next-home-finder.yml"
-    # "/docker-compose-files/docker-compose-website.yml"
-    # "/docker-compose-files/pro-gra//docker-compose.yml"
+    "docker-compose-next-home-finder.yml"
+    "docker-compose-website.yml"
+    "prometheus/docker-compose.yml"
     # Add more paths if needed
 )
 

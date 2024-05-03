@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  backend:
+    image: rudrapanchal/ecommerce:backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend/:/backend/
+      - ./data:/backend/
+    ports:
+      - 1007:8000
+    networks:
+      - backend
+
+  frontend:
+    image: rudrapanchal/ecommerce:frontend
+    volumes:
+      - ./frontend/:/frontend/
+      - /frontend/node_modules/
+    ports:
+      - 1006:3000
+    environment:
+      - NODE_ENV=development
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
