@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  auth-client:
+    image: enblitztechnologies/eat-happy:client # Use Node.js version 18
+    working_dir: /app/auth-client
+    ports:
+      - "5173:5173"
+
+    environment:
+      - NODE_ENV=development
+    networks:
+      - frontend   
+
+
+  auth-server:
+    image: enblitztechnologies/eat-happy:server # Use Node.js version 16.20.1
+    working_dir: /app/auth-server
+    ports:
+      - "8000:8000"
+
+   
+    depends_on:
+      - auth-client
+    networks:
+      - frontend  
+
+
+networks:
+  frontend:
