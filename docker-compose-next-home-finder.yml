@@ -5,6 +5,4 @@ services:
     image:  enblitztechnologies/next-home-finder:dev
     container_name: next-home-finder
     ports:
-      - "3000:3000"
-~
-
+      - "7000:3000"
