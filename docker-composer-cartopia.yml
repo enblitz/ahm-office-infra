@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    image: enblitztechnologies/cartopia:frontend 
+    container_name: online_shopping_web
+    ports:
+      - "8084:80"
+    depends_on:
+      - db
+    restart: always
+  db:
+    image: enblitztechnologies/cartopia:backend
+    container_name: online_shopping_db
+    environment:
+      MYSQL_ROOT_PASSWORD: example_password
+      MYSQL_DATABASE: onlineshop
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: example_password
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/mysql
+    restart: always
