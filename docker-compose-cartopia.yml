@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  web:
+  online_shopping_web:
     image: enblitztechnologies/cartopia:frontend
     container_name: online_shopping_web
     ports:
       - "8084:80"
     depends_on:
-      - db
+      - online_shopping_db
     restart: always
-  db:
+  online_shopping_db:
     image: enblitztechnologies/cartopia:backend
     container_name: online_shopping_db
     environment:
