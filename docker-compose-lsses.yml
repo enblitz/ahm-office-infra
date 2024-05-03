@@ -1,8 +1,9 @@
 version: '3'
 
 services:
-  web:
+  lsses-web:
     image: enblitztechnologies/lsses_web:latest
+    container_name: lsses-web
     ports:
       - "8000:8000"
     environment:
