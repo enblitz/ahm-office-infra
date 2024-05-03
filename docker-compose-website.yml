@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-  web:
+  enblitz-web:
     image: enblitztechnologies/website:v0.0.1
-    container_name: html-webapp
+    container_name: enblitz-web
     ports:
       - "3000:80"
