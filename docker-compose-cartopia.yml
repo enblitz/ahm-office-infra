@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: enblitztechnologies/cartopia:frontend 
+    image: enblitztechnologies/cartopia:frontend
     container_name: online_shopping_web
     ports:
       - "8084:80"
