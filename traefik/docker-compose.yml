@@ -1,8 +1,8 @@
 ---
 # -- (Optional) When using a custom network
-# networks:
-#   your-traefik-network:
-#     external: true
+networks:
+  enblitz:
+    external: true
 services:
   traefik:
     image: docker.io/library/traefik:v3.0.0
@@ -21,6 +21,6 @@ services:
     # environment:
     #   - CF_DNS_API_TOKEN=your-cloudflare-api-token
     # -- (Optional) When using a custom network
-    # networks:
-    #   - your-traefik-network
+    networks:
+      - enblitz
     restart: unless-stopped
