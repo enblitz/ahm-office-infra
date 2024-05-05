@@ -7,9 +7,9 @@ services:
     ports:
       - "8084:80"
     depends_on:
-      - online_shopping_db
+      - db
     restart: always
-  online_shopping_db:
+  db:
     image: enblitztechnologies/cartopia:backend
     container_name: online_shopping_db
     environment:
@@ -19,7 +19,5 @@ services:
       MYSQL_PASSWORD: example_password
     ports:
       - "3309:3306"
-    volumes:
-      - ./database:/docker-entrypoint-initdb.d
-      - ./data:/var/lib/mysql
     restart: always
+
