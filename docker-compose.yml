@@ -92,7 +92,7 @@ services:
     working_dir: /app/auth-server
     container_name: eathappy-auth-server
     ports:
-      - "8000:8000"
+      - "8020:8000"
     depends_on:
       - eathappy-auth-client
 
