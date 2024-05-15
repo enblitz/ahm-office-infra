@@ -24,15 +24,15 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
 # Access Application
-- 1) [Website](http://devops.enblitz.com:3000)
-- 2) [Jenkins](http://devops.enblitz.com:8081)
-- 3) [prometheus](http://devops.enblitz.com:9090)
-- 4) [grafana](http://devops.enblitz.com:3030)
-- 5) [lsses-web](http://devops.enblitz.com:8000)
-- 6) [wooden-craft-app](http://devops.enblitz.com:5001)
-- 7) [next-home-finder-app](http://devops.enblitz.com:3010)
-- 8) [eathappy](http://devops.enblitz.com:5173)
-- 9) [cartopia](http://devops.enblitz.com:8084)
+- [Website](http://devops.enblitz.com:3000)
+- [Jenkins](http://devops.enblitz.com:8081)
+- [prometheus](http://devops.enblitz.com:9090)
+- [grafana](http://devops.enblitz.com:3030)
+- [lsses-web](http://devops.enblitz.com:8000)
+- [wooden-craft-app](http://devops.enblitz.com:5001)
+- [next-home-finder-app](http://devops.enblitz.com:3010)
+- [eathappy](http://devops.enblitz.com:5173)
+- [cartopia](http://devops.enblitz.com:8084)
 
 
 ### Issue 1: web Error 9.0s
