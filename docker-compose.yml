@@ -1,0 +1,122 @@
+networks:
+  enblitz:
+    external: true
+
+volumes:
+  jenkins_home:
+  grafana-data:
+    driver: local
+  prometheus-data:
+    driver: local
+
+services:
+  enblitz-web:
+    image: enblitztechnologies/website:v0.0.1
+    container_name: enblitz-web
+    ports:
+      - "3000:80"
+    networks:
+      - enblitz
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8081:8080"
+      - "50001:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    restart: always
+
+  grafana:
+    image: grafana/grafana-oss:10.1.10-ubuntu
+    container_name: grafana
+    ports:
+      - '3030:3000'
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: prometheus
+    volumes:
+      - "./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - prometheus-data:/prometheus
+    ports:
+      - 9090:9090
+
+  lsses-web:
+    image: enblitztechnologies/lsses_web:latest
+    container_name: lsses-web
+    ports:
+      - "8000:8000"
+    environment:
+      - EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+      - EMAIL_HOST_USER='shahjainam6411@gmail.com'
+      - EMAIL_HOST='smtp.gmail.com'
+      - EMAIL_PORT='587'
+      - EMAIL_HOST_PASSWORD='arqulqpojmtzjxit'
+      - EMAIL_USE_TLS='true'
+      - RAZORPAY_API_KEY='rzp_test_I9DANSLk2wH5Ib'
+      - RAZORPAY_API_SECRET_KEY='F60ZYATM2RmiaMU4ptOOIpGx'
+
+  wooden-craft-app:
+    image:  enblitztechnologies/wooden-craft:latest
+    container_name: wooden-craft-app
+    ports:
+      - "5001:3000"
+
+  next-home-finder-app:
+    image:  enblitztechnologies/next-home-finder:dev
+    container_name: next-home-finder-app
+    ports:
+      - "3010:3000"
+      -
+
+  eathappy-auth-client:
+    image: enblitztechnologies/eat-happy:client # Use Node.js version 18
+    working_dir: /app/auth-client
+    container_name: eathappy-auth-client
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+
+  eathappy-auth-server:
+    image: enblitztechnologies/eat-happy:server # Use Node.js version 16.20.1
+    working_dir: /app/auth-server
+    container_name: eathappy-auth-server
+    ports:
+      - "8000:8000"
+    depends_on:
+      - eathappy-auth-client
+
+  cartopia-shopping-web:
+    image: enblitztechnologies/cartopia:frontend
+    container_name: cartopia-shopping-web
+    ports:
+      - "8084:80"
+    depends_on:
+      - online_shopping_db
+    restart: always
+
+  cartopia-shopping-db:
+    image: enblitztechnologies/cartopia:backend
+    container_name: cartopia-shopping-db
+    environment:
+      MYSQL_ROOT_PASSWORD: example_password
+      MYSQL_DATABASE: onlineshop
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: example_password
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/mysql
+    restart: always
