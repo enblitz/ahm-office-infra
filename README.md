@@ -33,6 +33,7 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 - [next-home-finder-app](http://devops.enblitz.com:3010)
 - [eathappy](http://devops.enblitz.com:5173)
 - [cartopia](http://devops.enblitz.com:8084)
+- [SonarQube](http://devops.enblitz.com:9001)
 
 
 ### Issue 1: web Error 9.0s

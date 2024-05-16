@@ -44,6 +44,7 @@ services:
 
   sonarqube:
     image: sonarqube:lts-community
+    container_name: sonarqube
     depends_on:
       - sonar_db
     environment:
@@ -61,6 +62,7 @@ services:
 
   sonar_db:
     image: postgres:13
+    container_name: sonar_db
     environment:
       POSTGRES_USER: sonar
       POSTGRES_PASSWORD: sonar
