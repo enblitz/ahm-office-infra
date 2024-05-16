@@ -71,6 +71,15 @@ services:
       - sonar_db:/var/lib/postgresql
       - sonar_db_data:/var/lib/postgresql/data
 
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: prometheus
+    volumes:
+      - "./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - prometheus-data:/prometheus
+    ports:
+      - 9090:9090
+
   grafana:
     image: grafana/grafana-oss:10.1.10-ubuntu
     container_name: grafana
@@ -85,14 +94,10 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
 
-  prometheus:
-    image: prom/prometheus:v2.52.0
-    container_name: prometheus
-    volumes:
-      - "./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml"
-      - prometheus-data:/prometheus
+  node_exporter_1:
+    image: prom/node-exporter:latest
     ports:
-      - 9090:9090
+      - "9100:9100"
 
   lsses-web:
     image: enblitztechnologies/lsses_web:latest

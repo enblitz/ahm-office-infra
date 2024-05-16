@@ -6,9 +6,6 @@
 ./scripts/start-stack.sh
 ```
 
-
-
-
 ### Notes:
 
 1) Update hostentry
@@ -23,34 +20,16 @@ run below command to get Jenkins token
 docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
-# Access Application
-- [Website](http://devops.enblitz.com:3000)
+# Tools
 - [Jenkins](http://devops.enblitz.com:8081)
-- [prometheus](http://devops.enblitz.com:9090)
-- [grafana](http://devops.enblitz.com:3030)
+- [Prometheus](http://devops.enblitz.com:9090)
+- [Grafana](http://devops.enblitz.com:3030)
+- [SonarQube](http://devops.enblitz.com:9001)
+
+# Application
+- [Website](http://devops.enblitz.com:3000)
 - [lsses-web](http://devops.enblitz.com:8000)
 - [wooden-craft-app](http://devops.enblitz.com:5001)
 - [next-home-finder-app](http://devops.enblitz.com:3010)
 - [eathappy](http://devops.enblitz.com:5173)
 - [cartopia](http://devops.enblitz.com:8084)
-- [SonarQube](http://devops.enblitz.com:9001)
-
-
-### Issue 1: web Error 9.0s
-Error response from daemon: pull access denied for enblitztechnologies/website, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
-
-Fixed:
-Connect to the server and run docker login command
-
-```bash
-docker login -u enblitztechnologies
-
-# reference output
-❯ docker login -u enblitztechnologies
-Password:
-WARNING! Your password will be stored unencrypted in /Users/jig/.docker/config.json.
-Configure a credential helper to remove this warning. See
-https://docs.docker.com/engine/reference/commandline/login/#credentials-store
-
-Login Succeeded
-```
