@@ -25,6 +25,7 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 - [Prometheus](http://devops.enblitz.com:9090)
 - [Grafana](http://devops.enblitz.com:3030)
 - [SonarQube](http://devops.enblitz.com:9001)
+- [nodeexporter](http://devops.enblitz.com:9100)
 
 # Application
 - [Website](http://devops.enblitz.com:3000)
