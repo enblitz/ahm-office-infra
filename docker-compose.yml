@@ -19,13 +19,20 @@ services:
       - enblitz
 
   jenkins:
+    # image: jenkins/jenkins:2.452.1-lts-jdk17
     image: jenkins/jenkins:lts
     container_name: jenkins
+    user: root
+    privileged: true
     ports:
       - "8081:8080"
       - "50001:50000"
+    # environment:
+    #     - JENKINS_OPTS='--prefix=/jenkins'
     volumes:
       - jenkins_home:/var/jenkins_home
+      - /usr/bin/docker:/usr/bin/docker
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
 
   grafana:
