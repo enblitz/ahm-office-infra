@@ -26,6 +26,12 @@ services:
     networks:
       - enblitz
 
+  ecommercefinal:
+    image: enblitztechnologies/ecommercefinal
+    container_name: ecommercefinal
+    ports:
+      - "8090:8090"
+
   lsses-web:
     image: enblitztechnologies/lsses_web:latest
     container_name: lsses-web
