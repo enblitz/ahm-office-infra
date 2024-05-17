@@ -27,14 +27,14 @@ services:
       - enblitz
 
   portainer:
-    image: enblitztechnologies/website:v0.0.1
+    image: portainer/portainer-ce:latest
     container_name: portainer
     ports:
       - "8000:8000"
       - "9443:9443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data: portainer/portainer-ce:latest
+      - portainer_data:/data portainer/portainer-ce:latest
     restart: always
     networks:
       - enblitz
