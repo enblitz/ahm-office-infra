@@ -1,0 +1,225 @@
+networks:
+  enblitz:
+    external: true
+
+# volumes:
+#   jenkins_home:
+#   grafana-data:
+#     driver: local
+#   prometheus-data:
+#     driver: local
+#   sonarqube_conf:
+#   sonarqube_data:
+#   sonarqube_extensions:
+#   sonarqube_logs:
+#   sonarqube_temp:
+#   sonar_db:
+#   sonar_db_data:
+#   portainer_data:
+
+services:
+  enblitz-web:
+    image: enblitztechnologies/website:v0.0.1
+    container_name: enblitz-web
+    ports:
+      - "3000:80"
+    networks:
+      - enblitz
+
+  # portainer:
+  #   image: portainer/portainer-ce:latest
+  #   container_name: portainer
+  #   ports:
+  #     - "8000:8000"
+  #     - "9443:9443"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - portainer_data:/data portainer/portainer-ce:latest
+  #   restart: always
+  #   networks:
+  #     - enblitz
+
+  # jenkins:
+  #   # image: jenkins/jenkins:2.452.1-lts-jdk17
+  #   image: jenkins/jenkins:lts
+  #   container_name: jenkins
+  #   user: root
+  #   privileged: true
+  #   ports:
+  #     - "8081:8080"
+  #     - "50001:50000"
+  #   # environment:
+  #   #     - JENKINS_OPTS='--prefix=/jenkins'
+  #   volumes:
+  #     - jenkins_home:/var/jenkins_home
+  #     - /usr/bin/docker:/usr/bin/docker
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   restart: always
+
+  # sonarqube:
+  #   image: sonarqube:lts-community
+  #   container_name: sonarqube
+  #   depends_on:
+  #     - sonar_db
+  #   environment:
+  #     SONAR_JDBC_URL: jdbc:postgresql://sonar_db:5432/sonar
+  #     SONAR_JDBC_USERNAME: sonar
+  #     SONAR_JDBC_PASSWORD: sonar
+  #   ports:
+  #     - "9001:9000"
+  #   volumes:
+  #     - sonarqube_conf:/opt/sonarqube/conf
+  #     - sonarqube_data:/opt/sonarqube/data
+  #     - sonarqube_extensions:/opt/sonarqube/extensions
+  #     - sonarqube_logs:/opt/sonarqube/logs
+  #     - sonarqube_temp:/opt/sonarqube/temp
+
+  # sonar_db:
+  #   image: postgres:13
+  #   container_name: sonar_db
+  #   environment:
+  #     POSTGRES_USER: sonar
+  #     POSTGRES_PASSWORD: sonar
+  #     POSTGRES_DB: sonar
+  #   volumes:
+  #     - sonar_db:/var/lib/postgresql
+  #     - sonar_db_data:/var/lib/postgresql/data
+
+  # prometheus:
+  #   image: prom/prometheus:v2.52.0
+  #   container_name: prometheus
+  #   volumes:
+  #     - "./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml"
+  #     - prometheus-data:/prometheus
+  #   ports:
+  #     - 9090:9090
+
+  # grafana:
+  #   image: grafana/grafana-oss:10.1.10-ubuntu
+  #   container_name: grafana
+  #   ports:
+  #     - '3030:3000'
+  #   volumes:
+  #     - grafana-data:/var/lib/grafana
+  #     - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+  #     - ./grafana/datasources:/etc/grafana/provisioning/datasources
+  #   restart: unless-stopped
+  #   environment:
+  #     - GF_SECURITY_ADMIN_USER=admin
+  #     - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  # alertmanager:
+  #   image: prom/alertmanager:v0.20.0
+  #   container_name: alertmanager
+  #   volumes:
+  #     - ./alertmanager:/etc/alertmanager
+  #   command:
+  #     - '--config.file=/etc/alertmanager/config.yml'
+  #     - '--storage.path=/alertmanager'
+  #   restart: unless-stopped
+  #   expose:
+  #     - 9093
+  #   labels:
+  #     org.label-schema.group: "monitoring"
+
+  # nodeexporter:
+  #   image: prom/node-exporter:v0.18.1
+  #   container_name: nodeexporter
+  #   volumes:
+  #     - /proc:/host/proc:ro
+  #     - /sys:/host/sys:ro
+  #     - /:/rootfs:ro
+  #   command:
+  #     - '--path.procfs=/host/proc'
+  #     - '--path.rootfs=/rootfs'
+  #     - '--path.sysfs=/host/sys'
+  #     - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+  #   restart: unless-stopped
+  #   expose:
+  #     - 9100
+  #   labels:
+  #     org.label-schema.group: "monitoring"
+
+  # cadvisor:
+  #   image: gcr.io/google-containers/cadvisor:v0.34.0
+  #   container_name: cadvisor
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:rw
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker:/var/lib/docker:ro
+  #     #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+  #   restart: unless-stopped
+  #   expose:
+  #     - 8080
+  #   labels:
+  #     org.label-schema.group: "monitoring"
+
+  # lsses-web:
+  #   image: enblitztechnologies/lsses_web:latest
+  #   container_name: lsses-web
+  #   ports:
+  #     - "8010:8000"
+  #   environment:
+  #     - EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+  #     - EMAIL_HOST_USER='shahjainam6411@gmail.com'
+  #     - EMAIL_HOST='smtp.gmail.com'
+  #     - EMAIL_PORT='587'
+  #     - EMAIL_HOST_PASSWORD='arqulqpojmtzjxit'
+  #     - EMAIL_USE_TLS='true'
+  #     - RAZORPAY_API_KEY='rzp_test_I9DANSLk2wH5Ib'
+  #     - RAZORPAY_API_SECRET_KEY='F60ZYATM2RmiaMU4ptOOIpGx'
+
+  # wooden-craft-app:
+  #   image:  enblitztechnologies/wooden-craft:latest
+  #   container_name: wooden-craft-app
+  #   ports:
+  #     - "5001:3000"
+
+  # next-home-finder-app:
+  #   image:  enblitztechnologies/next-home-finder:dev
+  #   container_name: next-home-finder-app
+  #   ports:
+  #     - "3010:3000"
+
+  # eathappy-auth-client:
+  #   image: enblitztechnologies/eat-happy:client # Use Node.js version 18
+  #   working_dir: /app/auth-client
+  #   container_name: eathappy-auth-client
+  #   ports:
+  #     - "5173:5173"
+  #   environment:
+  #     - NODE_ENV=development
+
+  # eathappy-auth-server:
+  #   image: enblitztechnologies/eat-happy:server # Use Node.js version 16.20.1
+  #   working_dir: /app/auth-server
+  #   container_name: eathappy-auth-server
+  #   ports:
+  #     - "8020:8000"
+  #   depends_on:
+  #     - eathappy-auth-client
+
+  # cartopia-shopping-web:
+  #   image: enblitztechnologies/cartopia:frontend
+  #   container_name: cartopia-shopping-web
+  #   ports:
+  #     - "8084:80"
+  #   depends_on:
+  #     - cartopia-shopping-db
+  #   restart: always
+
+  # cartopia-shopping-db:
+  #   image: enblitztechnologies/cartopia:backend
+  #   container_name: cartopia-shopping-db
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: example_password
+  #     MYSQL_DATABASE: onlineshop
+  #     MYSQL_USER: example_user
+  #     MYSQL_PASSWORD: example_password
+  #   ports:
+  #     - "3309:3306"
+  #   volumes:
+  #     - ./database:/docker-entrypoint-initdb.d
+  #     - ./data:/var/lib/mysql
+  #   restart: always
