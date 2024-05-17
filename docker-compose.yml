@@ -15,6 +15,7 @@ volumes:
   sonarqube_temp:
   sonar_db:
   sonar_db_data:
+  portainer_data:
 
 services:
   enblitz-web:
@@ -22,6 +23,19 @@ services:
     container_name: enblitz-web
     ports:
       - "3000:80"
+    networks:
+      - enblitz
+
+  portainer:
+    image: enblitztechnologies/website:v0.0.1
+    container_name: portainer
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data portainer/portainer-ce:latest
+    restart: always
     networks:
       - enblitz
 
@@ -145,7 +159,7 @@ services:
     image: enblitztechnologies/lsses_web:latest
     container_name: lsses-web
     ports:
-      - "8000:8000"
+      - "8010:8000"
     environment:
       - EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
       - EMAIL_HOST_USER='shahjainam6411@gmail.com'

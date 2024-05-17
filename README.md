@@ -21,15 +21,16 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
 # Tools
+- [Portainer](https://devops.enblitz.com:9443)
 - [Jenkins](http://devops.enblitz.com:8081)
 - [Prometheus](http://devops.enblitz.com:9090)
 - [Grafana](http://devops.enblitz.com:3030)
 - [SonarQube](http://devops.enblitz.com:9001)
-- [nodeexporter](http://devops.enblitz.com:9100)
+- [NodeExporter](http://devops.enblitz.com:9100)
 
 # Application
 - [Website](http://devops.enblitz.com:3000)
-- [lsses-web](http://devops.enblitz.com:8000)
+- [lsses-web](http://devops.enblitz.com:8010)
 - [wooden-craft-app](http://devops.enblitz.com:5001)
 - [next-home-finder-app](http://devops.enblitz.com:3010)
 - [eathappy](http://devops.enblitz.com:5173)
