@@ -59,23 +59,23 @@ services:
     ports:
       - "3010:3000"
 
-  eathappy-auth-client:
-    image: enblitztechnologies/eat-happy:client # Use Node.js version 18
+  eathappy-frontend:
+    image: enblitztechnologies/eatfront # Use Node.js version 18
     working_dir: /app/auth-client
-    container_name: eathappy-auth-client
+    container_name: foodstore-frontend
     ports:
       - "5173:5173"
     environment:
       - NODE_ENV=development
 
-  eathappy-auth-server:
-    image: enblitztechnologies/eat-happy:server # Use Node.js version 16.20.1
+  eathappy-backend:
+    image: enblitztechnologies/eatback:latest # Use Node.js version 16.20.1
     working_dir: /app/auth-server
     container_name: eathappy-auth-server
     ports:
       - "8020:8000"
     depends_on:
-      - eathappy-auth-client
+      - eathappy-frontend
 
   cartopia-shopping-web:
     image: enblitztechnologies/cartopia:frontend
