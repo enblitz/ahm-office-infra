@@ -16,7 +16,7 @@ networks:
 #   sonar_db:
 #   sonar_db_data:
 #   portainer_data:
-
+version: '3'
 services:
   enblitz-web:
     image: enblitztechnologies/website:v0.0.1
@@ -82,8 +82,11 @@ services:
     container_name: cartopia-shopping-web
     ports:
       - "8084:80"
-    depends_on:
-      - cartopia-shopping-db
+    environment:
+      - DB_HOST=cartopia-shopping-db
+      - DB_USER=example_user
+      - DB_PASSWORD=example_password
+      - DB_NAME=onlineshop
     restart: always
 
   cartopia-shopping-db:
@@ -97,6 +100,5 @@ services:
     ports:
       - "3309:3306"
     volumes:
-      - ./database:/docker-entrypoint-initdb.d
       - ./data:/var/lib/mysql
     restart: always
